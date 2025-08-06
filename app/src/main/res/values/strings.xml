@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">ManageUsersApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_info">User Info</string>
+    <string name="user_list">User List</string>
+    <string name="add_new_user">Add New User</string>
+    <string name="info">Info</string>
+    <string name="five">5</string>
+    <string name="forty_two">42</string>
+    <string name="time">Mon-Sat / 9:00AM - 5:00PM</string>
+    <string name="schedule">Schedule</string>
+    <string name="full_address">Full Address</string>
+    <string name="website">Web Site Address</string>
+    <string name="company">Company Info</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="name">Name</string>
+    <string name="tint_name">Dilek Dilşah ÖZKAN</string>
+    <string name="tint_email">dilekdilsah@gmail.com</string>
+    <string name="email">Email</string>
+    <string name="save">Save</string>
+
 </resources>

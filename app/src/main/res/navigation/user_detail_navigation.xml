@@ -2,25 +2,35 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/movie_detail_navigation"
+    android:id="@+id/user_navigation"
     app:startDestination="@id/userFragment">
 
     <fragment
         android:id="@+id/userFragment"
         android:name="com.dilsahozkan.manageusersapp.presentation.ui.UserListFragment"
-        android:label="fragment_media"
+        android:label="fragment_user"
         tools:layout="@layout/fragment_user_list" >
 
         <action
             android:id="@+id/action_movieFragment_to_movieDetailFragment"
             app:destination="@id/userDetailFragment" />
 
+        <action
+            android:id="@+id/action_movieFragment_to_newUserFragment"
+            app:destination="@id/newUserFragment" />
+
     </fragment>
 
     <fragment
         android:id="@+id/userDetailFragment"
         android:name="com.dilsahozkan.manageusersapp.presentation.ui.UserDetailFragment"
-        android:label="fragment_media_detail"
+        android:label="fragment_user_detail"
         tools:layout="@layout/fragment_user_detail" />
+
+    <fragment
+        android:id="@+id/newUserFragment"
+        android:name="com.dilsahozkan.manageusersapp.presentation.ui.NewUserFragment"
+        android:label="fragment_new_user"
+        tools:layout="@layout/fragment_new_user" />
 
 </navigation>

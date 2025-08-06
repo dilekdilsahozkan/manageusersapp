@@ -1,15 +1,17 @@
 package com.dilsahozkan.manageusersapp.presentation.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.dilsahozkan.manageusersapp.MainActivity
 import com.dilsahozkan.manageusersapp.R
 import com.dilsahozkan.manageusersapp.common.ViewState
 import com.dilsahozkan.manageusersapp.databinding.FragmentUserListBinding
@@ -30,7 +32,7 @@ class UserListFragment : Fragment() {
                 findNavController().navigate(
                     R.id.action_movieFragment_to_movieDetailFragment,
                     bundleOf(
-                       // MainActivity.BUNDLE_ID to it.id
+                        UserActivity.BUNDLE_ID to it.id
                     )
                 )
             }
@@ -47,6 +49,12 @@ class UserListFragment : Fragment() {
         viewModel.getUserInfo()
         addObserver()
 
+        binding.addUser.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_movieFragment_to_newUserFragment
+            )
+        }
+
         binding.recyclerView.adapter = userListAdapter
 
         return binding.root
@@ -58,10 +66,19 @@ class UserListFragment : Fragment() {
                 when (it) {
                     is ViewState.Success -> {
                         userListAdapter.submitList(it.data)
+                        binding.progressBar.isVisible = false
+                        binding.recyclerView.isEnabled = true
                     }
 
                     is ViewState.Error -> {
                         println(it.message)
+                        binding.progressBar.isVisible = false
+                        binding.recyclerView.isEnabled = true
+                    }
+
+                    is ViewState.Loading -> {
+                        binding.progressBar.isVisible = true
+                        binding.recyclerView.isEnabled = false
                     }
 
                     else -> {}

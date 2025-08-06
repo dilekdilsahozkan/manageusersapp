@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dilsahozkan.manageusersapp.common.BaseResult
 import com.dilsahozkan.manageusersapp.common.BaseViewModel
 import com.dilsahozkan.manageusersapp.common.ViewState
+import com.dilsahozkan.manageusersapp.data.remote.dto.UserDetailDto
 import com.dilsahozkan.manageusersapp.data.remote.dto.UserDto
 import com.dilsahozkan.manageusersapp.domain.UserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,16 +24,23 @@ class UserViewModel @Inject constructor(private val userUseCase: UserUseCase) :
         MutableStateFlow(ViewState.Idle())
     val userListState: StateFlow<ViewState<List<UserDto>>> = _userListState
 
-
-    var _userState: MutableStateFlow<ViewState<UserDto>> =
+    var _userState: MutableStateFlow<ViewState<UserDetailDto>> =
         MutableStateFlow(ViewState.Idle())
-    val userState: StateFlow<ViewState<UserDto>> = _userState
+    val userState: StateFlow<ViewState<UserDetailDto>> = _userState
+
+    var _updateState: MutableStateFlow<ViewState<UserDetailDto>> =
+        MutableStateFlow(ViewState.Idle())
+    val updateState: StateFlow<ViewState<UserDetailDto>> = _updateState
+
+    var _deleteState: MutableStateFlow<ViewState<UserDetailDto>> =
+        MutableStateFlow(ViewState.Idle())
+    val deleteState: StateFlow<ViewState<UserDetailDto>> = _deleteState
 
     fun getUserInfo() {
         viewModelScope.launch {
             userUseCase.getUserInfo()
                 .onStart {
-                    _userListState.value = ViewState.Idle()
+                    _userListState.value = ViewState.Loading()
                 }
                 .catch { exception ->
                     _userListState.value = ViewState.Error(message = exception.message)
@@ -41,7 +49,7 @@ class UserViewModel @Inject constructor(private val userUseCase: UserUseCase) :
                 .collect { result ->
                     when (result) {
                         is BaseResult.Success -> {
-                            _userListState.value = ViewState.Success(result.data)
+                            _userListState.value = ViewState.Success(result.data, result.responseCode, result.message)
                         }
 
                         is BaseResult.Error -> {
@@ -52,11 +60,35 @@ class UserViewModel @Inject constructor(private val userUseCase: UserUseCase) :
         }
     }
 
-    fun createUser(userDto: UserDto) {
+    fun getUserDetail(userId: String) {
+        viewModelScope.launch {
+            userUseCase.getUserDetail(userId)
+                .onStart {
+                    _userState.value = ViewState.Loading()
+                }
+                .catch { exception ->
+                    _userState.value = ViewState.Error(message = exception.message)
+                    Log.e("CATCH", "exception : $exception")
+                }
+                .collect { result ->
+                    when (result) {
+                        is BaseResult.Success -> {
+                            _userState.value = ViewState.Success(result.data, result.responseCode, result.message)
+                        }
+
+                        is BaseResult.Error -> {
+                            _userState.value = ViewState.Error()
+                        }
+                    }
+                }
+        }
+    }
+
+    fun createUser(userDto: UserDetailDto) {
         viewModelScope.launch {
             userUseCase.createUser(userDto)
                 .onStart {
-                    _userState.value = ViewState.Idle()
+                    _userState.value = ViewState.Loading()
                 }
                 .catch { exception ->
                     _userState.value = ViewState.Error(message = exception.message)
@@ -65,7 +97,7 @@ class UserViewModel @Inject constructor(private val userUseCase: UserUseCase) :
                 .collect { result ->
                     when (result) {
                         is BaseResult.Success -> {
-                            _userState.value = ViewState.Success(result.data)
+                            _userState.value = ViewState.Success(result.data, result.responseCode, result.message)
                         }
                         is BaseResult.Error -> {
                             _userState.value = ViewState.Error()
@@ -75,46 +107,45 @@ class UserViewModel @Inject constructor(private val userUseCase: UserUseCase) :
         }
     }
 
-    fun updateUser(id: Int, userDto: UserDto) {
+    fun updateUser(id: Int?, userDto: UserDetailDto) {
         viewModelScope.launch {
             userUseCase.updateUser(id, userDto)
                 .onStart {
-                    _userState.value = ViewState.Idle()
+                    _updateState.value = ViewState.Loading()
                 }
                 .catch { exception ->
-                    _userState.value = ViewState.Error(message = exception.message)
+                    _updateState.value = ViewState.Error(message = exception.message)
                     Log.e("UPDATE_USER_CATCH", "exception : $exception")
                 }
                 .collect { result ->
                     when (result) {
                         is BaseResult.Success -> {
-                            _userState.value = ViewState.Success(result.data)
+                            _updateState.value = ViewState.Success(result.data, result.responseCode, result.message)
                         }
                         is BaseResult.Error -> {
-                            _userState.value = ViewState.Error()
+                            _updateState.value = ViewState.Error()
                         }
                     }
                 }
         }
     }
-
-    fun deleteUser(id: Int) {
+    fun deleteUser(id: Int?) {
         viewModelScope.launch {
             userUseCase.deleteUser(id)
                 .onStart {
-                    _userState.value = ViewState.Idle()
+                    _deleteState.value = ViewState.Loading()
                 }
                 .catch { exception ->
-                    _userState.value = ViewState.Error(message = exception.message)
+                    _deleteState.value = ViewState.Error(message = exception.message)
                     Log.e("DELETE_USER_CATCH", "exception : $exception")
                 }
                 .collect { result ->
                     when (result) {
                         is BaseResult.Success -> {
-                            _userState.value = ViewState.Success(result.data)
+                            _deleteState.value = ViewState.Success(result.data, result.responseCode, result.message)
                         }
                         is BaseResult.Error -> {
-                            _userState.value = ViewState.Error()
+                            _deleteState.value = ViewState.Error()
                         }
                     }
                 }

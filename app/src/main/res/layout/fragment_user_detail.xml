@@ -1,21 +1,351 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:user="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.dilsahozkan.manageusersapp.data.remote.dto.UserDetailDto" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.UserDetailFragment">
+        android:layout_margin="16dp">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/upBanner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/user_info"
+                android:textSize="25sp"
+                android:textColor="@color/navy_blue"
+                android:fontFamily="@font/league_spartan_bold"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/info_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:padding="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/background_soft_blue"
+            app:layout_constraintTop_toBottomOf="@id/upBanner"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:scaleType="fitXY"
+                    app:riv_corner_radius="70dp"
+                    android:src="@drawable/ic_user"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.username}"
+                        android:background="@drawable/background_navy_blue"
+                        android:padding="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="25sp"
+                        android:fontFamily="@font/league_spartan_medium"/>
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.email}"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/background_navy_blue"
+                        android:padding="12dp"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/league_spartan_regular"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/background_white">
+
+                <TextView
+                    android:id="@+id/user_full_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{item.name}"
+                    android:textColor="@color/navy_blue"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/league_spartan_medium"/>
+
+                <TextView
+                    android:id="@+id/user_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:drawableStartCompat="@drawable/ic_phone"
+                    android:drawablePadding="5dp"
+                    android:text="@{item.phone}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/league_spartan_regular"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:padding="3dp"
+                    android:layout_weight="1"
+                    app:drawableStartCompat="@drawable/ic_star"
+                    android:drawablePadding="5dp"
+                    android:background="@drawable/background_white"
+                    android:text="@string/five"
+                    android:textColor="@color/navy_blue"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/league_spartan_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:padding="3dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    app:drawableStartCompat="@drawable/ic_comment"
+                    android:drawablePadding="5dp"
+                    android:background="@drawable/background_white"
+                    android:text="@string/forty_two"
+                    android:textColor="@color/navy_blue"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/league_spartan_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:padding="3dp"
+                    android:layout_weight="2"
+                    android:layout_marginStart="4dp"
+                    app:drawableStartCompat="@drawable/ic_clock"
+                    android:drawablePadding="5dp"
+                    android:background="@drawable/background_white"
+                    android:text="@string/time"
+                    android:textColor="@color/navy_blue"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/league_spartan_regular"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_navy_blue"
+                    android:padding="10dp"
+                    app:drawableStartCompat="@drawable/ic_calendar"
+                    android:drawablePadding="8dp"
+                    android:text="@string/schedule"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/league_spartan_medium"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="87dp"
+                    android:src="@drawable/ic_calendar"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_info"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_question"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_like"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/more_info"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            user:layout_constraintTop_toBottomOf="@+id/info_linear"
+            user:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/full_address"
+                android:textColor="@color/navy_blue"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/league_spartan_medium"
+                user:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/user_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                user:address="@{item.address}"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:fontFamily="@font/league_spartan_regular"
+                app:layout_constraintTop_toBottomOf="@id/address"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/website"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/website"
+                android:textColor="@color/navy_blue"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/league_spartan_medium"
+                app:layout_constraintTop_toBottomOf="@id/user_address"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/website_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.website}"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:fontFamily="@font/league_spartan_regular"
+                app:layout_constraintTop_toBottomOf="@id/website"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/company"
+                android:textColor="@color/navy_blue"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/league_spartan_medium"
+                app:layout_constraintTop_toBottomOf="@id/website_name"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/company_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                user:company="@{item.company}"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:fontFamily="@font/league_spartan_regular"
+                app:layout_constraintTop_toBottomOf="@id/company"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="25dp"
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/update_user"
+                android:layout_width="164dp"
+                android:layout_height="44dp"
+                android:includeFontPadding="false"
+                android:layout_weight="1"
+                style="@style/BaseButton"
+                android:text="@string/update" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/delete_user"
+                android:layout_width="164dp"
+                android:layout_height="44dp"
+                android:includeFontPadding="false"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                style="@style/BaseButton"
+                android:text="@string/delete"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            style="?android:attr/progressBarStyleLarge"
+            android:indeterminate="true"
+            android:tint="@color/navy_blue"
+            user:layout_constraintTop_toTopOf="parent"
+            user:layout_constraintBottom_toBottomOf="parent"
+            user:layout_constraintStart_toStartOf="parent"
+            user:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

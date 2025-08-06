@@ -2,11 +2,7 @@ package com.dilsahozkan.manageusersapp.presentation.ui
 
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.dilsahozkan.manageusersapp.R
 import com.dilsahozkan.manageusersapp.databinding.ActivityUserBinding
 import dagger.hilt.android.AndroidEntryPoint
 

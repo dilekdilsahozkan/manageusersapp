@@ -11,13 +11,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rootView"
         android:layout_width="match_parent"
+        android:layout_marginVertical="10dp"
         android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="136dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
             android:orientation="horizontal"
-            android:background="@color/light_blue"
+            android:background="@drawable/background_soft_blue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,20 +35,19 @@
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/movie_image"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_height="110dp"
                     android:layout_weight="2"
-                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_user"
-                    app:riv_corner_radius="12dp" />
+                    app:riv_corner_radius="70dp" />
 
                 <LinearLayout
                     android:id="@+id/detail_linear"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="4"
-                    android:layout_marginStart="8dp"
+                    android:layout_weight="5"
                     android:orientation="vertical"
                     android:paddingHorizontal="8dp">
 
@@ -54,49 +55,69 @@
                         android:id="@+id/user_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/leaguespartan_medium"
                         android:maxLines="1"
                         android:text="@{item.name}"
                         android:textColor="@color/navy_blue"
-                        android:textSize="16dp"/>
+                        android:textSize="20sp"
+                        android:fontFamily="@font/league_spartan_bold" />
 
                     <TextView
                         android:id="@+id/user_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:fontFamily="@font/leaguespartan_regular"
-                        android:lineHeight="16dp"
                         android:text="@{item.email}"
-                        android:maxLines="2"
-                        android:textColor="@color/gray"
-                        android:textSize="13dp"/>
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/league_spartan_medium" />
 
-                    <Button
-                        android:id="@+id/movie_date"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/navy_blue"
-                        android:fontFamily="@font/leaguespartan_medium"
-                        android:text="Info"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"/>
+                        android:layout_marginTop="15dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/detail_page"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            style="@style/InfoButton"
+                            android:fontFamily="@font/league_spartan_medium"
+                            android:text="@string/info"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:src="@drawable/ic_calendar"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="3dp"
+                            android:src="@drawable/ic_info"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="3dp"
+                            android:src="@drawable/ic_question"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="3dp"
+                            android:src="@drawable/ic_like"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/light_gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

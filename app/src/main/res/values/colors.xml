@@ -5,6 +5,7 @@
     <color name="gray">#8D99AE</color>
     <color name="dark_gray">#ADB5BD</color>
     <color name="light_gray">#E9ECEF</color>
+    <color name="darkGrayTransparent">#ADB5BD</color>
     <color name="navy_blue">#2260FF</color>
     <color name="light_blue">#CAD6FF</color>
     <color name="gold">#E6B91E</color>
